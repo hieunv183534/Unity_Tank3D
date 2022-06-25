@@ -7,7 +7,7 @@ namespace Complete
 {
     public class GameManager : MonoBehaviour
     {
-        public int m_NumRoundsToWin = 5;            // The number of rounds a single player has to win to win the game.
+        public int m_NumRoundsToWin = 3;            // The number of rounds a single player has to win to win the game.
         public float m_StartDelay = 3f;             // The delay between the start of RoundStarting and RoundPlaying phases.
         public float m_EndDelay = 3f;               // The delay between the end of RoundPlaying and RoundEnding phases.
         public CameraControl m_CameraControl;       // Reference to the CameraControl script for control during different phases.
@@ -153,7 +153,10 @@ namespace Complete
 
             // If there is a winner, increment their score.
             if (m_RoundWinner != null)
+            {
                 m_RoundWinner.m_Wins++;
+                Debug.Log(m_RoundWinner.m_Wins);
+            }
 
             // Now the winner's score has been incremented, see if someone has one the game.
             m_GameWinner = GetGameWinner();
@@ -195,7 +198,10 @@ namespace Complete
             {
                 // ... and if one of them is active, it is the winner so return it.
                 if (m_Tanks[i].m_Instance.activeSelf)
+                {
+                    Debug.Log("win là :" + i);
                     return m_Tanks[i];
+                }
             }
 
             // If none of the tanks are active it is a draw so return null.
@@ -206,12 +212,16 @@ namespace Complete
         // This function is to find out if there is a winner of the game.
         private TankManager GetGameWinner()
         {
+            Debug.Log("Check win the game!");
             // Go through all the tanks...
             for (int i = 0; i < m_Tanks.Length; i++)
             {
                 // ... and if one of them has enough rounds to win the game, return it.
                 if (m_Tanks[i].m_Wins == m_NumRoundsToWin)
+                {
+                    Debug.Log(i + " win the game!");
                     return m_Tanks[i];
+                }
             }
 
             // If no tanks have enough rounds to win, return null.
