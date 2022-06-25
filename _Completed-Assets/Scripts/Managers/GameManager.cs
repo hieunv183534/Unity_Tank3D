@@ -112,19 +112,11 @@ namespace Complete
             m_RoundNumber++;
             m_MessageText.text = "ROUND " + m_RoundNumber;
             Destroy(myMap);
-            myMap =  Instantiate(m_Maps[m_RoundNumber % 2]) as GameObject;
+            myMap = Instantiate(m_Maps[m_RoundNumber - 1]) as GameObject;
             m_Tanks[0].m_Shooting.m_Untiled = false;
             m_Tanks[1].m_Shooting.m_Untiled = false;
-            if (m_RoundNumber %2 == 0)
-            {
-                m_Tanks[0].m_Movement.m_Speed = 5f;
-                m_Tanks[1].m_Movement.m_Speed = 5f;
-            }
-            else
-            {
-                m_Tanks[0].m_Movement.m_Speed = 5f;
-                m_Tanks[1].m_Movement.m_Speed = 5f;
-            }
+            m_Tanks[0].m_Movement.m_Speed = 5f;
+            m_Tanks[1].m_Movement.m_Speed = 5f;
 
             // Wait for the specified length of time until yielding control back to the game loop.
             yield return m_StartWait;
