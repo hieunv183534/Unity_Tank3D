@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using System;
 
 namespace Complete
 {
@@ -16,7 +17,7 @@ namespace Complete
         public GameObject[] m_Maps;             // 
         [HideInInspector] public GameObject myMap;             // 
         public TankManager[] m_Tanks;               // A collection of managers for enabling and disabling different aspects of the tanks.
-
+        public ShellExplosion shell;                // Reference to the shell
 
         private int m_RoundNumber;                  // Which round the game is currently on.
         private WaitForSeconds m_StartWait;         // Used to have a delay whilst the round starts.
@@ -113,17 +114,21 @@ namespace Complete
             m_MessageText.text = "ROUND " + m_RoundNumber;
             Destroy(myMap);
             myMap =  Instantiate(m_Maps[m_RoundNumber % 2]) as GameObject;
-            m_Tanks[0].m_Shooting.m_Untiled = false;
-            m_Tanks[1].m_Shooting.m_Untiled = false;
-            if (m_RoundNumber %2 == 0)
+            
+            switch(m_RoundNumber)
             {
-                m_Tanks[0].m_Movement.m_Speed = 30f;
-                m_Tanks[1].m_Movement.m_Speed = 30f;
-            }
-            else
-            {
-                m_Tanks[0].m_Movement.m_Speed = 30f;
-                m_Tanks[1].m_Movement.m_Speed = 30f;
+                case 1:
+                    m_Tanks[0].m_Health.m_StartingHealth = 1;
+                    m_Tanks[0].m_Movement.m_Speed = 5f;
+                    m_Tanks[1].m_Health.m_StartingHealth = 1;
+                    m_Tanks[1].m_Movement.m_Speed = 5f;
+                    break;
+                case 2:
+                    m_Tanks[0].m_Movement.m_Speed = 10f;
+                    m_Tanks[1].m_Movement.m_Speed = 10f;
+                    break;
+                default:
+                    break;
             }
 
             // Wait for the specified length of time until yielding control back to the game loop.
