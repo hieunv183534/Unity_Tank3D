@@ -26,6 +26,16 @@ namespace Complete
         }
 
 
+        public void OnCollisionEnter(Collision a){
+            if(a.gameObject.name.Contains("Gates1")){
+                Debug.Log("Dichj chuyen");
+                GameObject gate2 = GameObject.Find("Gates2");
+                Transform houseTransform = gate2.GetComponent<Transform>();
+                m_Rigidbody.MovePosition(houseTransform.position);
+            }
+        }
+
+
         private void OnEnable ()
         {
             // When the tank is turned on, make sure it's not kinematic.
