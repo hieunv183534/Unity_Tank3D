@@ -8,9 +8,9 @@ namespace Complete
 {
     public class GameManager : MonoBehaviour
     {
-        public int m_NumRoundsToWin = 3;            // The number of rounds a single player has to win to win the game.
-        public float m_StartDelay = 3f;             // The delay between the start of RoundStarting and RoundPlaying phases.
-        public float m_EndDelay = 3f;               // The delay between the end of RoundPlaying and RoundEnding phases.
+        public int m_NumRoundsToWin = 20;            // The number of rounds a single player has to win to win the game.
+        public float m_StartDelay = 6f;             // The delay between the start of RoundStarting and RoundPlaying phases.
+        public float m_EndDelay = 6f;               // The delay between the end of RoundPlaying and RoundEnding phases.
         public CameraControl m_CameraControl;       // Reference to the CameraControl script for control during different phases.
         public Text m_MessageText;                  // Reference to the overlay Text to display winning text, etc.
         public GameObject m_TankPrefab;             // Reference to the prefab the players will control.
@@ -86,7 +86,7 @@ namespace Complete
             yield return StartCoroutine(RoundEnding());
 
             // This code is not run until 'RoundEnding' has finished.  At which point, check if a game winner has been found.
-            if (m_GameWinner != null)
+            if (m_GameWinner != null || m_RoundNumber == 5)
             {
                 // If there is a game winner, restart the level.
                 SceneManager.LoadScene(0);
@@ -242,7 +242,7 @@ namespace Complete
         // This function is to find out if there is a winner of the game.
         private TankManager GetGameWinner()
         {
-            Debug.Log("Check win the game!");
+            Debug.Log("Check!!!!!!! win the game!");
             // Go through all the tanks...
             for (int i = 0; i < m_Tanks.Length; i++)
             {
@@ -251,6 +251,10 @@ namespace Complete
                 {
                     Debug.Log(i + " win the game!");
                     return m_Tanks[i];
+                }
+                else if(m_RoundNumber == 5)
+                {
+                    Debug.Log("draw");
                 }
             }
 
@@ -281,6 +285,11 @@ namespace Complete
             // If there is a game winner, change the entire message to reflect that.
             if (m_GameWinner != null)
                 message = m_GameWinner.m_ColoredPlayerText + " WINS THE GAME!";
+
+            if(m_GameWinner == null && m_RoundNumber == 5)
+            {
+                message = "GAME DRAW!";
+            }
 
             return message;
         }
