@@ -25,6 +25,14 @@ namespace Complete
             m_Rigidbody = GetComponent<Rigidbody> ();
         }
 
+        
+        public void OnCollisionEnter(Collision a){
+            if(a.gameObject.name.Contains("Gates")){
+                Debug.Log("Dichj chuyen");
+                m_Rigidbody.MovePosition(new Vector3(10,100,10));
+            }
+        }
+
 
         private void OnEnable ()
         {
