@@ -86,7 +86,7 @@ namespace Complete
             yield return StartCoroutine(RoundEnding());
 
             // This code is not run until 'RoundEnding' has finished.  At which point, check if a game winner has been found.
-            if (m_GameWinner != null)
+            if (m_GameWinner != null || m_RoundNumber == 5)
             {
                 // If there is a game winner, restart the level.
                 SceneManager.LoadScene(0);
@@ -199,7 +199,10 @@ namespace Complete
 
             // If there is a winner, increment their score.
             if (m_RoundWinner != null)
+            {
                 m_RoundWinner.m_Wins++;
+                Debug.Log(m_RoundWinner.m_Wins);
+            }
 
             // Now the winner's score has been incremented, see if someone has one the game.
             m_GameWinner = GetGameWinner();
@@ -241,7 +244,10 @@ namespace Complete
             {
                 // ... and if one of them is active, it is the winner so return it.
                 if (m_Tanks[i].m_Instance.activeSelf)
+                {
+                    Debug.Log("win l� :" + i);
                     return m_Tanks[i];
+                }
             }
 
             // If none of the tanks are active it is a draw so return null.
@@ -252,12 +258,20 @@ namespace Complete
         // This function is to find out if there is a winner of the game.
         private TankManager GetGameWinner()
         {
+            Debug.Log("Check!!!!!!! win the game!");
             // Go through all the tanks...
             for (int i = 0; i < m_Tanks.Length; i++)
             {
                 // ... and if one of them has enough rounds to win the game, return it.
                 if (m_Tanks[i].m_Wins == m_NumRoundsToWin)
+                {
+                    Debug.Log(i + " win the game!");
                     return m_Tanks[i];
+                }
+                else if(m_RoundNumber == 5)
+                {
+                    Debug.Log("draw");
+                }
             }
 
             // If no tanks have enough rounds to win, return null.
@@ -287,6 +301,11 @@ namespace Complete
             // If there is a game winner, change the entire message to reflect that.
             if (m_GameWinner != null)
                 message = m_GameWinner.m_ColoredPlayerText + " WINS THE GAME!";
+
+            if(m_GameWinner == null && m_RoundNumber == 5)
+            {
+                message = "GAME DRAW!";
+            }
 
             return message;
         }
