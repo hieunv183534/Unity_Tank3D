@@ -25,11 +25,13 @@ namespace Complete
             m_Rigidbody = GetComponent<Rigidbody> ();
         }
 
-        
+
         public void OnCollisionEnter(Collision a){
-            if(a.gameObject.name.Contains("Gates")){
+            if(a.gameObject.name.Contains("Gates1")){
                 Debug.Log("Dichj chuyen");
-                m_Rigidbody.MovePosition(new Vector3(10,100,10));
+                GameObject gate2 = GameObject.Find("Gates2");
+                Transform houseTransform = gate2.GetComponent<Transform>();
+                m_Rigidbody.MovePosition(houseTransform.position);
             }
         }
 
