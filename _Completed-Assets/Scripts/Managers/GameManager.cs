@@ -8,7 +8,7 @@ namespace Complete
 {
     public class GameManager : MonoBehaviour
     {
-        public int m_NumRoundsToWin = 5;            // The number of rounds a single player has to win to win the game.
+        public int m_NumRoundsToWin = 3;            // The number of rounds a single player has to win to win the game.
         public float m_StartDelay = 3f;             // The delay between the start of RoundStarting and RoundPlaying phases.
         public float m_EndDelay = 3f;               // The delay between the end of RoundPlaying and RoundEnding phases.
         public CameraControl m_CameraControl;       // Reference to the CameraControl script for control during different phases.
@@ -115,34 +115,50 @@ namespace Complete
             Destroy(myMap);
             // myMap =  Instantiate(m_Maps[m_RoundNumber % 2]) as GameObject;
             myMap = Instantiate(m_Maps[m_RoundNumber - 1]) as GameObject;
-            m_Tanks[0].m_Shooting.m_Untiled = false;
-            m_Tanks[1].m_Shooting.m_Untiled = false;
+            // m_Tanks[0].m_Shooting.m_Untiled = false;
+            // m_Tanks[1].m_Shooting.m_Untiled = false;
             m_Tanks[0].m_Movement.m_Speed = 5f;
             m_Tanks[1].m_Movement.m_Speed = 5f;
             
             switch(m_RoundNumber)
             {
                 case 1:
-                    m_Tanks[0].m_Movement.m_Speed = 10f;
-                    m_Tanks[1].m_Movement.m_Speed = 10f;
-                    break;
-                case 2:
-                    m_Tanks[0].m_Movement.m_Speed = 10f;
-                    m_Tanks[1].m_Movement.m_Speed = 10f;
-                    break;
-                case 3:
-                    m_Tanks[0].m_Movement.m_Speed = 10f;
-                    m_Tanks[1].m_Movement.m_Speed = 10f;
-                    break;
-                case 4:
-                    m_Tanks[0].m_Movement.m_Speed = 10f;
-                    m_Tanks[1].m_Movement.m_Speed = 10f;
-                    break;
-                case 5:
+                    Debug.Log("case 1");
                     m_Tanks[0].m_Health.m_StartingHealth = 1;
                     m_Tanks[0].m_Movement.m_Speed = 5f;
                     m_Tanks[1].m_Health.m_StartingHealth = 1;
                     m_Tanks[1].m_Movement.m_Speed = 5f;
+                    
+                    break;
+                case 2:
+                    Debug.Log("case 2");
+                    m_Tanks[0].m_Health.m_StartingHealth = 100;
+                    m_Tanks[0].m_Movement.m_Speed = 10f;
+                    m_Tanks[1].m_Health.m_StartingHealth = 100;
+                    m_Tanks[1].m_Movement.m_Speed = 10f;
+                    break;
+                case 3:
+                    Debug.Log("case 3");
+
+                    m_Tanks[0].m_Health.m_StartingHealth = 100;
+                    m_Tanks[0].m_Movement.m_Speed = 10f;
+                    m_Tanks[1].m_Health.m_StartingHealth = 100;
+                    m_Tanks[1].m_Movement.m_Speed = 10f;
+                    break;
+                case 4:
+                    Debug.Log("case 4");
+
+                    m_Tanks[0].m_Health.m_StartingHealth = 100;
+                    m_Tanks[0].m_Movement.m_Speed = 10f;
+                    m_Tanks[1].m_Health.m_StartingHealth = 100;
+                    m_Tanks[1].m_Movement.m_Speed = 10f;
+                    break;
+                case 5:
+                    Debug.Log("case 5");
+                    m_Tanks[0].m_Health.m_StartingHealth = 100;
+                    m_Tanks[0].m_Movement.m_Speed = 10f;
+                    m_Tanks[1].m_Health.m_StartingHealth = 100;
+                    m_Tanks[1].m_Movement.m_Speed = 10f;
                     break;
                 default:
                     break;
