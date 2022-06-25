@@ -113,19 +113,36 @@ namespace Complete
             m_RoundNumber++;
             m_MessageText.text = "ROUND " + m_RoundNumber;
             Destroy(myMap);
-            myMap =  Instantiate(m_Maps[m_RoundNumber % 2]) as GameObject;
+            // myMap =  Instantiate(m_Maps[m_RoundNumber % 2]) as GameObject;
+            myMap = Instantiate(m_Maps[m_RoundNumber - 1]) as GameObject;
+            m_Tanks[0].m_Shooting.m_Untiled = false;
+            m_Tanks[1].m_Shooting.m_Untiled = false;
+            m_Tanks[0].m_Movement.m_Speed = 5f;
+            m_Tanks[1].m_Movement.m_Speed = 5f;
             
             switch(m_RoundNumber)
             {
                 case 1:
-                    m_Tanks[0].m_Health.m_StartingHealth = 1;
-                    m_Tanks[0].m_Movement.m_Speed = 5f;
-                    m_Tanks[1].m_Health.m_StartingHealth = 1;
-                    m_Tanks[1].m_Movement.m_Speed = 5f;
+                    m_Tanks[0].m_Movement.m_Speed = 10f;
+                    m_Tanks[1].m_Movement.m_Speed = 10f;
                     break;
                 case 2:
                     m_Tanks[0].m_Movement.m_Speed = 10f;
                     m_Tanks[1].m_Movement.m_Speed = 10f;
+                    break;
+                case 3:
+                    m_Tanks[0].m_Movement.m_Speed = 10f;
+                    m_Tanks[1].m_Movement.m_Speed = 10f;
+                    break;
+                case 4:
+                    m_Tanks[0].m_Movement.m_Speed = 10f;
+                    m_Tanks[1].m_Movement.m_Speed = 10f;
+                    break;
+                case 5:
+                    m_Tanks[0].m_Health.m_StartingHealth = 1;
+                    m_Tanks[0].m_Movement.m_Speed = 5f;
+                    m_Tanks[1].m_Health.m_StartingHealth = 1;
+                    m_Tanks[1].m_Movement.m_Speed = 5f;
                     break;
                 default:
                     break;
