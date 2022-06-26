@@ -115,50 +115,50 @@ namespace Complete
             Destroy(myMap);
             // myMap =  Instantiate(m_Maps[m_RoundNumber % 2]) as GameObject;
             myMap = Instantiate(m_Maps[m_RoundNumber - 1]) as GameObject;
-            // m_Tanks[0].m_Shooting.m_Untiled = false;
-            // m_Tanks[1].m_Shooting.m_Untiled = false;
             m_Tanks[0].m_Movement.m_Speed = 5f;
             m_Tanks[1].m_Movement.m_Speed = 5f;
             
             switch(m_RoundNumber)
             {
                 case 1:
-                    Debug.Log("case 1");
                     m_Tanks[0].m_Health.m_StartingHealth = 1;
                     m_Tanks[0].m_Movement.m_Speed = 5f;
                     m_Tanks[1].m_Health.m_StartingHealth = 1;
                     m_Tanks[1].m_Movement.m_Speed = 5f;
-                    
+                    m_Tanks[0].m_Shooting.m_Untiled = true;
+                    m_Tanks[1].m_Shooting.m_Untiled = true;
                     break;
                 case 2:
-                    Debug.Log("case 2");
                     m_Tanks[0].m_Health.m_StartingHealth = 100;
                     m_Tanks[0].m_Movement.m_Speed = 10f;
                     m_Tanks[1].m_Health.m_StartingHealth = 100;
                     m_Tanks[1].m_Movement.m_Speed = 10f;
+                    m_Tanks[0].m_Shooting.m_Untiled = true;
+                    m_Tanks[1].m_Shooting.m_Untiled = true;
                     break;
                 case 3:
-                    Debug.Log("case 3");
-
                     m_Tanks[0].m_Health.m_StartingHealth = 100;
                     m_Tanks[0].m_Movement.m_Speed = 10f;
                     m_Tanks[1].m_Health.m_StartingHealth = 100;
                     m_Tanks[1].m_Movement.m_Speed = 10f;
+                    m_Tanks[0].m_Shooting.m_Untiled = true;
+                    m_Tanks[1].m_Shooting.m_Untiled = true;
                     break;
                 case 4:
-                    Debug.Log("case 4");
-
                     m_Tanks[0].m_Health.m_StartingHealth = 100;
                     m_Tanks[0].m_Movement.m_Speed = 10f;
                     m_Tanks[1].m_Health.m_StartingHealth = 100;
                     m_Tanks[1].m_Movement.m_Speed = 10f;
+                    m_Tanks[0].m_Shooting.m_Untiled = true;
+                    m_Tanks[1].m_Shooting.m_Untiled = true;
                     break;
                 case 5:
-                    Debug.Log("case 5");
                     m_Tanks[0].m_Health.m_StartingHealth = 100;
                     m_Tanks[0].m_Movement.m_Speed = 10f;
                     m_Tanks[1].m_Health.m_StartingHealth = 100;
                     m_Tanks[1].m_Movement.m_Speed = 10f;
+                    m_Tanks[0].m_Shooting.m_Untiled = false;
+                    m_Tanks[1].m_Shooting.m_Untiled = false;
                     break;
                 default:
                     break;
@@ -201,7 +201,6 @@ namespace Complete
             if (m_RoundWinner != null)
             {
                 m_RoundWinner.m_Wins++;
-                Debug.Log(m_RoundWinner.m_Wins);
             }
 
             // Now the winner's score has been incremented, see if someone has one the game.
@@ -258,19 +257,18 @@ namespace Complete
         // This function is to find out if there is a winner of the game.
         private TankManager GetGameWinner()
         {
-            Debug.Log("Check!!!!!!! win the game!");
             // Go through all the tanks...
             for (int i = 0; i < m_Tanks.Length; i++)
             {
                 // ... and if one of them has enough rounds to win the game, return it.
                 if (m_Tanks[i].m_Wins == m_NumRoundsToWin)
                 {
-                    Debug.Log(i + " win the game!");
                     return m_Tanks[i];
                 }
                 else if(m_RoundNumber == 5)
                 {
                     Debug.Log("draw");
+                    return null;
                 }
             }
 
